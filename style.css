@@ -12,37 +12,63 @@ body {
   min-height: 100vh;
 }
 
+#display {
+  display: flex;
+  justify-content: flex-end;
+  align-items:flex-end;
+  background-color: #c0c0c0;
+  padding: 5px;
+}
+
+#display-number {
+  font-size: 72px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 5px;
   width: 400px;
   height: 600px;
-  margin: auto;
-  border: 5px outset silver;
+  margin: 48px auto;
+  background-color: #0f0f0f;
+  border: 15px outset silver;
   border-radius: 10px;
+  padding: 5px;
 }
 
 .row {
   display: flex;
   flex: 1;
-  justify-content: space-evenly;
+  gap: 5px;
 }
 
-.number, .operator, .tool {
+#multiply {
+  font-size: 36px;
+}
+
+.number, .operator, .tool, .special {
   flex: 1;
   font-size: 36px;
   color: whitesmoke;
 }
 
-.number {
+.number, .special {
   background-color: darkslategrey;
 }
   
 .operator {
   background-color: slategray;
+  font-size: 48px;
 }
 
 .tool {
   background-color: darkslateblue;
 }
+
+button {
+  border-style: inset;
+  border-radius: 5px;
+}
+
+
