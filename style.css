@@ -1,0 +1,48 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 400px;
+  height: 600px;
+  margin: auto;
+  border: 5px outset silver;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  flex: 1;
+  justify-content: space-evenly;
+}
+
+.number, .operator, .tool {
+  flex: 1;
+  font-size: 36px;
+  color: whitesmoke;
+}
+
+.number {
+  background-color: darkslategrey;
+}
+  
+.operator {
+  background-color: slategray;
+}
+
+.tool {
+  background-color: darkslateblue;
+}
