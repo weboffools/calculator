@@ -1,8 +1,8 @@
 
-let currentTotal;
-let num;
-let operator;
-let re = new RegExp("\d");
+let total;
+let firstNum;
+let secondNum;
+const displayArea = document.querySelector('#display');
 
 function add(a, b) {
   return a + b;
@@ -20,9 +20,23 @@ function divide(a, b) {
   return a / b;
 }
 
+function getNum () {
+  const displayNum = document.querySelector('#display-number');
+  return displayNum.textContent;
+}
+
+function operate(a, b) {
+  console.log(`You are going to operate on ${a} and ${b}`);
+  return 0;
+}
+
+function clearDisplay() {
+  displayArea.replaceChildren();
+  return 0;
+}
+
 function updateDisplay(num) {
 
-  const displayArea = document.querySelector('#display');
   const content = document.createElement('span');
   content.setAttribute('id', 'display-number');
 
@@ -55,13 +69,24 @@ function btnClick() {
           updateDisplay(btnContent);
           break;
         case ('operator'):
-          break;
+          if (btnContent === '=') {
+            if (secondNum) {
+            secondNum = getNum();
+            let answer = operate(firstNum, secondNum);
+            updateDisplay(answer);
+            }
+            break;
+          } else {
+            firstNum = getNum();
+            operator = btnContent;
+            break;
+          }
       }
     });
   });
 }
 
-updateDisplay(num);
+updateDisplay(firstNum);
 btnClick();
 
 
