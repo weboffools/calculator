@@ -1,7 +1,8 @@
 
-let currentTotal = 0;
-let num = 0;
-let operator = '';
+let currentTotal;
+let num;
+let operator;
+let re = new RegExp("\d");
 
 function add(a, b) {
   return a + b;
@@ -26,30 +27,41 @@ function updateDisplay(num) {
   content.setAttribute('id', 'display-number');
 
   if (displayArea.firstElementChild) {
-  if (displayArea.firstElementChild.textContent === '0') {
+    if (displayArea.firstElementChild.textContent === '0') {
+      content.textContent = num;
+    } else {
+      let currentNum = displayArea.firstElementChild.textContent;
+      let newNum = `${currentNum}${num}`;
+      content.textContent = newNum;
+    }
     displayArea.replaceChildren();
-    content.textContent = num;
+    displayArea.appendChild(content);
   } else {
-    let currentNum = displayArea.firstElementChild.textContent;
-    let newNum = `${currentNum}${num}`;
-    content.textContent = newNum;
+    content.textContent = '0';
+    displayArea.appendChild(content);
   }
-  }
-  displayArea.appendChild(content);
+  
 }
 
-function numClick() {
-  const numbers = document.querySelectorAll('.number');
+function btnClick() {
+  const buttons = document.querySelectorAll('button');
 
-  numbers.forEach((number) => {
-    number.addEventListener('click', function (e) {
-      num = e.target.textContent;
-      updateDisplay(num)
+  buttons.forEach((button) => {
+    button.addEventListener('click', function (e) {
+      let btnClass = e.target.classList[0];
+      let btnContent = e.target.textContent; 
+      switch (btnClass) {
+        case ('number'):
+          updateDisplay(btnContent);
+          break;
+        case ('operator'):
+          break;
+      }
     });
   });
 }
 
 updateDisplay(num);
-numClick();
+btnClick();
 
 
