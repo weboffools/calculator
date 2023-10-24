@@ -25,13 +25,26 @@ function getNum () {
   return displayNum.textContent;
 }
 
-function operate(a, b) {
-  console.log(`You are going to operate on ${a} and ${b}`);
-  return 0;
+function operate(a, b, op) {
+  console.log(`You are going to ${op} ${a} and ${b}`);
+  switch (op) {
+    case '+':
+      return add(a, b);
+    case '-':
+      return subtract(a, b);
+    case '*':
+      return multiply(a, b);
+    case '/':
+      return divide(a, b);
+  }
 }
 
 function clearDisplay() {
   displayArea.replaceChildren();
+  const content = document.createElement('span');
+  content.setAttribute('id', 'display-number');
+  content.textContent = '0';
+  displayArea.appendChild(content)
   return 0;
 }
 
@@ -70,16 +83,28 @@ function btnClick() {
           break;
         case ('operator'):
           if (btnContent === '=') {
-            if (secondNum) {
+            if (!secondNum) {
             secondNum = getNum();
-            let answer = operate(firstNum, secondNum);
+            let answer = operate(firstNum, secondNum, operator);
             updateDisplay(answer);
             }
             break;
           } else {
-            firstNum = getNum();
-            operator = btnContent;
+            if (!firstNum) {
+              firstNum = getNum();
+              operator = btnContent;
+            }
+            else if (!secondNum) {
+              secondNum = getNum();
+              operator = btnContent;
+              operate(firstNum, secondNum, operator);
+            }
             break;
+          }
+        case 'tool':
+          if (btnContent === 'AC') {
+          clearDisplay();
+          break;
           }
       }
     });
