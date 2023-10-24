@@ -97,8 +97,12 @@ function btnClick() {
             else if (!secondNum) {
               secondNum = getNum();
               operator = btnContent;
-              operate(firstNum, secondNum, operator);
+              total = operate(firstNum, secondNum, operator);
+            } else {
+              firstNum = total;
+              operator = btnContent;
             }
+            clearDisplay();
             break;
           }
         case 'tool':
