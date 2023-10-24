@@ -1,7 +1,7 @@
+let num = [];
+let stack = [];
+let operator;
 
-let total;
-let firstNum;
-let secondNum;
 const displayArea = document.querySelector('#display');
 
 function add(a, b) {
@@ -75,47 +75,60 @@ function btnClick() {
 
   buttons.forEach((button) => {
     button.addEventListener('click', function (e) {
-      let btnClass = e.target.classList[0];
-      let btnContent = e.target.textContent; 
-      switch (btnClass) {
-        case ('number'):
-          updateDisplay(btnContent);
-          break;
-        case ('operator'):
-          if (btnContent === '=') {
-            if (!secondNum) {
-            secondNum = getNum();
-            let answer = operate(firstNum, secondNum, operator);
-            updateDisplay(answer);
-            }
-            break;
-          } else {
-            if (!firstNum) {
-              firstNum = getNum();
-              operator = btnContent;
-            }
-            else if (!secondNum) {
-              secondNum = getNum();
-              operator = btnContent;
-              total = operate(firstNum, secondNum, operator);
-            } else {
-              firstNum = total;
-              operator = btnContent;
-            }
-            clearDisplay();
-            break;
-          }
-        case 'tool':
-          if (btnContent === 'AC') {
-          clearDisplay();
-          break;
-          }
+
+      let btn = e.target.textContent;
+      if (/\d/.test(btn)) {
+        num.push(btn);
+        updateDisplay(btn);
       }
+      else if (/[\+\-\*\/]/.test(btn)) {
+        operator = btn;
+        stack.push(Number(num.join('')));
+        num = [];
+      }
+
+//      let btnClass = e.target.classList[0];
+//      let btnContent = e.target.textContent; 
+//      switch (btnClass) {
+//        case ('number'):
+//          updateDisplay(btnContent);
+//          break;
+//        case ('operator'):
+//          if (btnContent === '=') {
+//            if (!secondNum) {
+//            secondNum = getNum();
+//            let answer = operate(firstNum, secondNum, operator);
+//            updateDisplay(answer);
+//            }
+//            break;
+//          } else {
+//            if (!firstNum) {
+//              firstNum = getNum();
+//              operator = btnContent;
+//            }
+//            else if (!secondNum) {
+//              secondNum = getNum();
+//              operator = btnContent;
+//              total = operate(firstNum, secondNum, operator);
+//            } else {
+//              firstNum = total;
+//              operator = btnContent;
+//            }
+//            clearDisplay();
+//            break;
+//          }
+//        case 'tool':
+//          if (btnContent === 'AC') {
+//          clearDisplay();
+//          break;
+//          }
+//      }
+
     });
   });
 }
 
-updateDisplay(firstNum);
+// updateDisplay(firstNum);
 btnClick();
 
 
