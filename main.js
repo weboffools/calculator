@@ -86,6 +86,10 @@ function btnClick() {
         stack.push(Number(num.join('')));
         num = [];
       }
+      else if (btn === 'AC') {
+        clearDisplay();
+        num = [];
+      }
 
 //      let btnClass = e.target.classList[0];
 //      let btnContent = e.target.textContent; 
