@@ -91,19 +91,16 @@ function btnClickEvents() {
           state = 1;
           operator = btn;
           updateDisplay(btn);
-          console.log(numA);
         } else {
           let a = Number(numA);
           let b = Number(numB);
-          console.log(`${numA} ${operator} ${numB}`);
           total = operate(a, b, operator);
-          console.log(`Total: ${total}`);
           clearDisplay();
           updateDisplay(total);
+          operator = btn;
           updateDisplay(operator);
           numA = String(total); 
           numB = '';
-          operator = btn;
         }
       }
       else if (btn === '=') {
@@ -111,8 +108,6 @@ function btnClickEvents() {
         let a = Number(numA);
         let b = Number(numB);
         total = operate(a, b, operator);
-
-        console.log(`Total: ${total}`);
         clearDisplay();
         updateDisplay(total);
         initState();
