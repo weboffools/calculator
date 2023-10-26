@@ -1,6 +1,8 @@
-let num = [];
-let stack = [];
-let operator;
+let numA = '';
+let numB = '';
+let state = 0;
+let operator = '';
+let total;
 
 const displayArea = document.querySelector('#display');
 
@@ -26,7 +28,6 @@ function getNum () {
 }
 
 function operate(a, b, op) {
-  console.log(`You are going to ${op} ${a} and ${b}`);
   switch (op) {
     case '+':
       return add(a, b);
@@ -77,60 +78,31 @@ function btnClick() {
     button.addEventListener('click', function (e) {
 
       let btn = e.target.textContent;
+      
       if (/\d/.test(btn)) {
-        num.push(btn);
-        updateDisplay(btn);
+        if (state === 0) {
+          numA += btn; 
+        } else {
+          numB += btn;
+        }
       }
       else if (/[\+\-\*\/]/.test(btn)) {
-        operator = btn;
-        stack.push(Number(num.join('')));
-        num = [];
+          if (state === 0) {
+            state = 1;
+            operator = btn;
+          } else {
+            let a = Number(numA);
+            let b = Number(numB);
+            total = operate(a, b, operator);
+            numA = String(total); 
+            numB = '';
+            operator = btn;
+          }
       }
-      else if (btn === 'AC') {
-        clearDisplay();
-        num = [];
-      }
-
-//      let btnClass = e.target.classList[0];
-//      let btnContent = e.target.textContent; 
-//      switch (btnClass) {
-//        case ('number'):
-//          updateDisplay(btnContent);
-//          break;
-//        case ('operator'):
-//          if (btnContent === '=') {
-//            if (!secondNum) {
-//            secondNum = getNum();
-//            let answer = operate(firstNum, secondNum, operator);
-//            updateDisplay(answer);
-//            }
-//            break;
-//          } else {
-//            if (!firstNum) {
-//              firstNum = getNum();
-//              operator = btnContent;
-//            }
-//            else if (!secondNum) {
-//              secondNum = getNum();
-//              operator = btnContent;
-//              total = operate(firstNum, secondNum, operator);
-//            } else {
-//              firstNum = total;
-//              operator = btnContent;
-//            }
-//            clearDisplay();
-//            break;
-//          }
-//        case 'tool':
-//          if (btnContent === 'AC') {
-//          clearDisplay();
-//          break;
-//          }
-//      }
-
     });
   });
 }
+   
 
 // updateDisplay(firstNum);
 btnClick();
