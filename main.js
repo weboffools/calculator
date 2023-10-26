@@ -1,3 +1,11 @@
+// *************************8
+//                         8 
+//                        8
+//      JS Calculator    8 
+//                        8
+//                         8
+// *************************8
+
 let numA = '';
 let numB = '';
 let state = 0;
@@ -5,6 +13,13 @@ let operator = '';
 let total;
 
 const displayArea = document.querySelector('#display');
+
+function initState() {
+  numA = '';
+  numB = '';
+  state = 0;
+  operator = '';
+}
 
 function add(a, b) {
   return a + b;
@@ -22,7 +37,7 @@ function divide(a, b) {
   return a / b;
 }
 
-function getNum () {
+function getNumFromDisplay () {
   const displayNum = document.querySelector('#display-number');
   return displayNum.textContent;
 }
@@ -54,7 +69,7 @@ function updateDisplay(num) {
   
 }
 
-function btnClick() {
+function btnClickEvents() {
   const buttons = document.querySelectorAll('button');
 
   buttons.forEach((button) => {
@@ -65,11 +80,14 @@ function btnClick() {
       if (/\d/.test(btn)) {
         if (state === 0) {
           numA += btn; 
+          updateDisplay(btn);
         } else {
           numB += btn;
+          updateDisplay(btn);
         }
       }
       else if (/[\+\-\*\/]/.test(btn)) {
+        updateDisplay(btn);
         if (state === 0) {
           state = 1;
           operator = btn;
@@ -80,6 +98,8 @@ function btnClick() {
           console.log(`${numA} ${operator} ${numB}`);
           total = operate(a, b, operator);
           console.log(`Total: ${total}`);
+          clearDisplay();
+          updateDisplay(total);
           numA = String(total); 
           numB = '';
           operator = btn;
@@ -90,19 +110,22 @@ function btnClick() {
         let a = Number(numA);
         let b = Number(numB);
         total = operate(a, b, operator);
+
         console.log(`Total: ${total}`);
-        numA = '';
-        numB = '';
-        operator = '';
-        state = 0;
+        clearDisplay();
+        updateDisplay(total);
+        initState();
         }
+      }
+      else if (btn === 'AC') {
+        clearDisplay();
+        initState();
       }
     });
   });
 }
    
 
-// updateDisplay(firstNum);
-btnClick();
+btnClickEvents();
 
 
