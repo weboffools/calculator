@@ -53,21 +53,8 @@ function updateDisplay(num) {
 
   const content = document.createElement('span');
   content.setAttribute('id', 'display-number');
-
-  if (displayArea.firstElementChild) {
-    if (displayArea.firstElementChild.textContent === '0') {
-      content.textContent = num;
-    } else {
-      let currentNum = displayArea.firstElementChild.textContent;
-      let newNum = `${currentNum}${num}`;
-      content.textContent = newNum;
-    }
-    displayArea.replaceChildren();
-    displayArea.appendChild(content);
-  } else {
-    content.textContent = '0';
-    displayArea.appendChild(content);
-  }
+  content.textContent = num;
+  displayArea.appendChild(content);
   
 }
 
