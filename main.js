@@ -42,11 +42,7 @@ function operate(a, b, op) {
 
 function clearDisplay() {
   displayArea.replaceChildren();
-  const content = document.createElement('span');
-  content.setAttribute('id', 'display-number');
-  content.textContent = '0';
-  displayArea.appendChild(content)
-  return 0;
+  
 }
 
 function updateDisplay(num) {
