@@ -87,10 +87,10 @@ function btnClickEvents() {
         }
       }
       else if (/[\+\-\*\/]/.test(btn)) {
-        updateDisplay(btn);
         if (state === 0) {
           state = 1;
           operator = btn;
+          updateDisplay(btn);
           console.log(numA);
         } else {
           let a = Number(numA);
@@ -100,6 +100,7 @@ function btnClickEvents() {
           console.log(`Total: ${total}`);
           clearDisplay();
           updateDisplay(total);
+          updateDisplay(operator);
           numA = String(total); 
           numB = '';
           operator = btn;
