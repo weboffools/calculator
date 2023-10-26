@@ -87,17 +87,32 @@ function btnClick() {
         }
       }
       else if (/[\+\-\*\/]/.test(btn)) {
-          if (state === 0) {
-            state = 1;
-            operator = btn;
-          } else {
-            let a = Number(numA);
-            let b = Number(numB);
-            total = operate(a, b, operator);
-            numA = String(total); 
-            numB = '';
-            operator = btn;
-          }
+        if (state === 0) {
+          state = 1;
+          operator = btn;
+          console.log(numA);
+        } else {
+          let a = Number(numA);
+          let b = Number(numB);
+          console.log(`${numA} ${operator} ${numB}`);
+          total = operate(a, b, operator);
+          console.log(`Total: ${total}`);
+          numA = String(total); 
+          numB = '';
+          operator = btn;
+        }
+      }
+      else if (btn === '=') {
+        if (numA && numB) {
+        let a = Number(numA);
+        let b = Number(numB);
+        total = operate(a, b, operator);
+        console.log(`Total: ${total}`);
+        numA = '';
+        numB = '';
+        operator = '';
+        state = 0;
+        }
       }
     });
   });
