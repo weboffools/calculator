@@ -104,18 +104,30 @@ function btnClickEvents() {
         }
       }
       else if (btn === '=') {
-        if (numA && numB) {
-        let a = Number(numA);
-        let b = Number(numB);
-        total = operate(a, b, operator);
-        clearDisplay();
-        updateDisplay(total);
-        initState();
+        if (numA !== '' && numB != '') {
+          let a = Number(numA);
+          let b = Number(numB);
+          total = operate(a, b, operator);
+          clearDisplay();
+          updateDisplay(total);
+          numA = total;
+          numB = ''
+          state = 0;
         }
       }
       else if (btn === 'AC') {
         clearDisplay();
         initState();
+      }
+      else if (btn === '⇦') {
+        if (displayArea.children.length !== 0) {
+          if (state === 0) {
+            displayArea.removeChild(displayArea.lastChild);
+            if (displayArea.children.length !== 0) {
+              numA = displayArea.lastChild.textContent;
+            }
+          }
+        }
       }
     });
   });
