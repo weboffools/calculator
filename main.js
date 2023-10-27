@@ -34,7 +34,14 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-  return a / b;
+  if (b === 0) {
+    alert('Dividing by zero is dangerous!');
+    clearDisplay();
+    initState();
+    return 0;
+  } else {
+    return a / b;
+  }
 }
 
 function getNumFromDisplay () {
@@ -93,6 +100,7 @@ function btnClickEvents() {
           operator = btn;
           updateDisplay(btn);
         } else {
+          
           let a = Number(numA);
           let b = Number(numB);
           total = operate(a, b, operator);
