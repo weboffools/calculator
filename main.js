@@ -69,6 +69,7 @@ function updateDisplay(num) {
   
 }
 
+
 function btnClickEvents() {
   const buttons = document.querySelectorAll('button');
 
@@ -95,6 +96,7 @@ function btnClickEvents() {
           let a = Number(numA);
           let b = Number(numB);
           total = operate(a, b, operator);
+          total.toString().length > 6 ? total = total.toFixed(2) : 0;
           clearDisplay();
           updateDisplay(total);
           operator = btn;
@@ -108,6 +110,7 @@ function btnClickEvents() {
           let a = Number(numA);
           let b = Number(numB);
           total = operate(a, b, operator);
+          total.toString().length > 6 ? total = total.toFixed(2) : 0;
           clearDisplay();
           updateDisplay(total);
           numA = total;
@@ -125,6 +128,8 @@ function btnClickEvents() {
             displayArea.removeChild(displayArea.lastChild);
             if (displayArea.children.length !== 0) {
               numA = displayArea.lastChild.textContent;
+            } else {
+              initState();
             }
           }
         }
